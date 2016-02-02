@@ -852,7 +852,7 @@
     disply: block;
     margin-top: 6px;
     padding: 7px;
-    width: 100%;
+    width: 150px;
     background-color: #738bd7;
     border-radius: 3px;
     -webkit-transition: border .2s,background-color .1s;
@@ -868,12 +868,11 @@
     color: #fff;
     border: 1px solid #697ec4;
     disply: block;
-    position: absolute;
-    left: 0px;
-    top: 50px;
     margin-top: 6px;
+    position: absolute;
+    left: 20px;
     padding: 7px;
-    width: 100%;
+    width: 150px;
     background-color: #738bd7;
     border-radius: 3px;
     -webkit-transition: border .2s,background-color .1s;
