@@ -280,16 +280,12 @@ SettingsPanel.prototype.construct = function() {
     
     settingsInner += '' +
     '               </div>' +
-    '                   <ul class="button-group">' +
-    '                       <li>' +
-    '                           <div class="bd-pane control-group" id="bd-other-pane" style="display:none;">' +
-    '                               <div class="button">' +
-    '                                   <button type="button" class="btn btn-primary" id="load-json-settings">Load Settings</button>' +
-    '                                   <button type="button" class="btn btn-primary" id="save-json-settings">Save Settings</button>' +
-    '                               </div>' +
-    '                           </div>' +
-    '                       </li>'
-    '                   </ul>' +
+    '                     <div class="bd-pane control-group" id="bd-other-pane" style="display:none;">' +
+    '                         <div class="button">' +
+    '                             <button type="button" class="btn btn-primary" id="load-json-settings">Load Settings</button>' +
+    '                             <button type="button" class="btn btn-primary" id="save-json-settings">Save Settings</button>' +
+    '                         </div>' +
+    '                     </div>' +
     '               </div>' +
     '' +
     '       </div>' +
