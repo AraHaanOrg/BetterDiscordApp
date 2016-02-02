@@ -25,7 +25,7 @@ EmoteModule.prototype.init = function() {
 };
 
 EmoteModule.prototype.getBlacklist = function() {
-    $.getJSON("https://cdn.rawgit.com/Jiiks/betterDiscordApp/"+_hash+"/emotefilter.json", function(data) { bemotes = data.blacklist; });
+    $.getJSON("https://cdn.rawgit.com/AraHaan/betterDiscordApp/tree/test/"+_hash+"/emotefilter.json", function(data) { bemotes = data.blacklist; });
 };
 
 EmoteModule.prototype.obsCallback = function(mutation) {

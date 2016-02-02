@@ -2,7 +2,7 @@
   "name": "betterdiscord",
   "description": "Better Discord enhances Discord.",
   "version": "0.2.5",
-  "homepage": "https://github.com/AraHaan/BetterDiscordApp/test",
+  "homepage": "https://github.com/AraHaan/BetterDiscordApp/tree/test",
   "license": "MIT",
   "main": "betterdiscord.js"
 }
