@@ -19,7 +19,7 @@ Utils.prototype.jqDefer = function(fnc) {
 };
 
 Utils.prototype.getHash = function() {
-    $.getJSON("https://api.github.com/repos/Jiiks/BetterDiscordApp/commits/master", function(data) {
+    $.getJSON("https://api.github.com/repos/AraHaan/BetterDiscordApp/commits/test", function(data) {
         _hash = data.sha;
         emoteModule.getBlacklist();
     });
@@ -31,7 +31,7 @@ Utils.prototype.loadHtml = function(html, callback) {
   }).appendTo("body");  
 
   //TODO Inject these in next core update
-  html = '//cdn.rawgit.com/Jiiks/BetterDiscordApp/' + _hash + '/html/' + html + '.html';
+  html = '//cdn.rawgit.com/AraHaan/BetterDiscordApp/' + _hash + '/html/' + html + '.html';
   
   container.load(html, callback());
 };
