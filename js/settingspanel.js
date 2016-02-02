@@ -106,7 +106,12 @@ SettingsPanel.prototype.changeTab = function(tab) {
             controlGroups.html("<span>Coming soon</span>");
         break;
         case "bd-other-tab":
-            
+            $("load-json-settings").on("click", function (e) {
+                //Load json code here.
+            })
+            $("save-json-settings").on("click", function (e) {
+                //Save json code here.
+            })
         break;
     }
 };
@@ -275,11 +280,11 @@ SettingsPanel.prototype.construct = function() {
     
     settingsInner += '' +
     '               </div>' +
-    '               <div class="bd-pane control-group" id="bd-other-pane" style="">';
-    '                   <div class="button" onclick="">' +
+    '               <div class="bd-pane control-group" id="bd-other-pane" style="display:none;">';
+    '                   <div class="button">' +
     '                    <button type="button" class="btn btn-primary" id="load-json-settings">Load Settings</button>' +
     '                   </div>' +
-    '                   <div class="button" onclick="">' +
+    '                   <div class="button">' +
     '                    <button type="button" class="btn btn-primary" id="save-json-settings">Save Settings</button>' +
     '                   </div>' +
     '               </div>' +
