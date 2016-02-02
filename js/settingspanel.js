@@ -105,6 +105,9 @@ SettingsPanel.prototype.changeTab = function(tab) {
         case "bd-themes-tab":
             controlGroups.html("<span>Coming soon</span>");
         break;
+        case "bd-other-tab":
+            
+        break;
     }
 };
 
@@ -174,6 +177,7 @@ SettingsPanel.prototype.construct = function() {
     '           <div class="tab-bar-item bd-tab" id="bd-customcss-tab" onclick="settingsPanel.changeTab(\'bd-customcss-tab\');">Custom CSS</div>' +
     '           <div class="tab-bar-item bd-tab" id="bd-plugins-tab" onclick="settingsPanel.changeTab(\'bd-plugins-tab\');">Plugins</div>' +
     '           <div class="tab-bar-item bd-tab" id="bd-themes-tab" onclick="settingsPanel.changeTab(\'bd-themes-tab\');">Themes</div>' +
+    '           <div class="tab-bar-item bd-tab" id="bd-other-tab" onclick="settingsPanel.changeTab(\'bd-other-tab\');">Other</div>' +
     '       </div>' +
     '       <div class="bd-settings">' +
     '' +
@@ -222,7 +226,8 @@ SettingsPanel.prototype.construct = function() {
         settingsInner += '' +
         '<tr>' +
         '   <td>'+plugin.getName()+'</td>' +
-        '   <td width="99%"><textarea>'+plugin.getDescription()+'</textarea></td>' +
+        '   <td width="99%">'+plugin.getDescription()+'</td>' +
+//        '   <td width="99%"><textarea>'+plugin.getDescription()+'</textarea></td>' +
         '   <td>'+plugin.getAuthor()+'</td>' +
         '   <td>'+plugin.getVersion()+'</td>' +
         '   <td>' +
@@ -252,7 +257,8 @@ SettingsPanel.prototype.construct = function() {
             settingsInner += '' +
             '<tr>' +
             '   <td>'+this["name"]+'</td>' +
-            '   <td width="99%"><textarea>'+this["description"]+'</textarea></td>' +
+            '   <td width="99%">'+this["description"]+'</td>' +
+//            '   <td width="99%"><textarea>'+this["description"]+'</textarea></td>' +
             '   <td>'+this["author"]+'</td>' +
             '   <td>'+this["version"]+'</td>' +
             '   <td>' +
@@ -270,6 +276,12 @@ SettingsPanel.prototype.construct = function() {
     
     
     settingsInner += '' +
+    '               </div>' +
+    '               <div class="bd-pane control-group" id="bd-other-pane" style="display:none;">';
+    '                   <div class="button" onclick="themeModule.handleTheme(this);">' +
+    '                    <button type="button" class="btn btn-primary" onclick="" id="save-json-settings">Save Settings</button>' +
+    '                    <button type="button" class="btn btn-primary" onclick="" id="load-json-settings">Load Settings</button>' +
+    '                   </div>' +
     '               </div>' +
     '' +
     '       </div>' +

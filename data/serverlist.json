@@ -832,5 +832,12 @@
       "icon": null,
       "language": "EN",
       "title": "We didnt name this server at all"
+    },
+    "[Division]"
+      "code": "0ZuJtFPiGu0YtDjO",
+      "description": "Void Elsword Guild Server.",
+      "icon": null,
+      "language": "EN",
+      "title": "Division"
   }
 }}
