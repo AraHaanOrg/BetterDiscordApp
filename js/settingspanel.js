@@ -283,8 +283,6 @@ SettingsPanel.prototype.construct = function() {
     '               <div class="bd-pane control-group" id="bd-other-pane" style="display:none;">';
     '                   <div class="button">' +
     '                    <button type="button" class="btn btn-primary" id="load-json-settings">Load Settings</button>' +
-    '                   </div>' +
-    '                   <div class="button">' +
     '                    <button type="button" class="btn btn-primary" id="save-json-settings">Save Settings</button>' +
     '                   </div>' +
     '               </div>' +
