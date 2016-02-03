@@ -80,19 +80,19 @@ namespace BetterDiscordWI.panels
 
                 Directory.CreateDirectory(_tempPath);
 
-                DownloadResource("BetterDiscord.zip", "https://github.com/Jiiks/BetterDiscordApp/archive/stable.zip");
+                DownloadResource("BetterDiscordBeta.zip", "https://github.com/AraHaan/BetterDiscordApp/archive/test-stable.zip");
 
-                while (!File.Exists(_tempPath + "\\BetterDiscord.zip"))
+                while (!File.Exists(_tempPath + "\\BetterDiscordBeta.zip"))
                 {
                     Debug.Print("Waiting for download");
                     Thread.Sleep(100);
                 }
 
-                AppendLog("Extracting BetterDiscord");
+                AppendLog("Extracting BetterDiscord v2.6 Beta");
 
                 ZipArchive zar =
                     ZipFile.OpenRead(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                     "\\BetterDiscord\\temp\\BetterDiscord.zip");
+                                     "\\BetterDiscord\\temp\\BetterDiscordBeta.zip");
                 zar.ExtractToDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                        "\\BetterDiscord\\temp\\");
 
