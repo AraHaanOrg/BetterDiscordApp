@@ -9,6 +9,8 @@
 var settingsButton = null;
 var panel = null;
 
+const fs = require('fs');
+
 function SettingsPanel() {
     utils.injectJs("https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/codemirror.min.js");
     utils.injectJs("https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/mode/css/css.min.js");
@@ -112,7 +114,6 @@ SettingsPanel.prototype.changeTab = function(tab) {
 };
 
 function SaveJSONSettings() {
-    const fs = require('fs');
     var bdags0 = localStorage.getItem("bda-gs-0");
     var bdags1 = localStorage.getItem("bda-gs-1");
     var bdags2 = localStorage.getItem("bda-gs-2");
@@ -133,7 +134,14 @@ function SaveJSONSettings() {
     var file = _dataPath + "Settings.json";
     var settingsjson = fs.open(file, 'w');
     var data = [{    "bdags0": bdags0,    "bdags1": bdags1,    "bdags2": bdags2,    "bdags4": bdags4,    "bdags3": bdags3,    "bdaes0": bdaes0,    "bdaes7": bdaes7,    "bdaes1": bdaes1,    "bdaes2": bdaes2,    "bdaes3": bdaes3,    "bdaes4": bdaes4,    "bdaes5": bdaes5,    "bdaes6": bdaes6}];
-    fs.writeFile(file, data)
+    fs.writeFile(file, data);
+    if(fs.stats.isFile(file)) {
+        console.log("Settings Exported Successfully.");
+    }
+    else
+    {
+        console.log("Failed to Export Settings");
+    }
 }
 
 function LoadJSONSettings() {
