@@ -148,7 +148,7 @@ namespace BetterDiscordWI.panels
 
                 AppendLog("Moving BetterDiscord to resources\\node_modules\\");
 
-                Directory.Move(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BetterDiscord\\temp\\BetterDiscordApp-stable", GetParent().DiscordPath + "\\resources\\node_modules\\BetterDiscord");
+                Directory.Move(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BetterDiscord\\temp\\BetterDiscordApp-test-stable", GetParent().DiscordPath + "\\resources\\node_modules\\BetterDiscord");
 
                 try
                 {
