@@ -106,16 +106,18 @@ SettingsPanel.prototype.changeTab = function(tab) {
             controlGroups.html("<span>Coming soon</span>");
         break;
         case "bd-other-tab":
-            $("load-json-settings").on("click", function (e) {
-                //Load json code here.
-            })
-            $("save-json-settings").on("click", function (e) {
-                //Save json code here.
-            })
+            
         break;
     }
 };
 
+function SaveJSONSettings() {
+    console.log("Save Settings button was clicked.")
+}
+
+function LoadJSONSettings() {
+    console.log("Load Settings button was clicked.")
+}
 
 SettingsPanel.prototype.updateSetting = function(checkbox) {    
         var cb = $(checkbox).children().find('input[type="checkbox"]');
@@ -282,8 +284,8 @@ SettingsPanel.prototype.construct = function() {
     '               </div>' +
     '                     <div class="bd-pane control-group" id="bd-other-pane" style="display:none;">' +
     '                         <div class="button-group">' +
-    '                             <button type="button" class="btn btn-primary" id="load-json-settings">Load Settings</button>' +
-    '                             <button type="button" class="btn btn-primary" id="save-json-settings">Save Settings</button>' +
+    '                             <button type="button" class="btn btn-primary" onclick="LoadJSONSettings()" id="load-json-settings">Load Settings</button>' +
+    '                             <button type="button" class="btn btn-primary" onclick="SaveJSONSettings()" id="save-json-settings">Save Settings</button>' +
     '                         </div>' +
     '                     </div>' +
     '               </div>' +
