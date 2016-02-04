@@ -128,12 +128,13 @@ function SaveJSONSettings() {
     var bdaes5 = localStorage.getItem("bda-es-5");
     var bdaes6 = localStorage.getItem("bda-es-6");
     var customcss = localStorage.getItem("bdcustomcss");
+    var fsstat = fs.stat(_dataPath, function(err, stats) {})
     var os = process.platform;
     var _dataPath = os == "win32" ? process.env.APPDATA : os == 'darwin' ? process.env.HOME + '/Library/Preferences' : '/var/local';
     _dataPath += "/BetterDiscord/settings/";
     var file = _dataPath + "Settings.json";
     var data = [{    "bdags0": '"' + bdags0 + '"',    "bdags1": '"' + bdags1 + '"',    "bdags2": '"' + bdags2 + '"',    "bdags4": '"' + bdags4 + '"',    "bdags3": '"' + bdags3 + '"',    "bdaes0": '"' + bdaes0 + '"',    "bdaes7": '"' + bdaes7 + '"',    "bdaes1": '"' + bdaes1 + '"',    "bdaes2": '"' + bdaes2 + '"',    "bdaes3": '"' + bdaes3 + '"',    "bdaes4": '"' + bdaes4 + '"',    "bdaes5": '"' + bdaes5 + '"',    "bdaes6": '"' + bdaes6 + '"',    "bdcustomcss": '"' + customcss + '"'}];
-    if(fs.stat(_dataPath, function(err, stats) {}).isDirectory) {
+    if(fsstat.isDirectory) {
         fs.writeFile(file, data);
     }
     else {
