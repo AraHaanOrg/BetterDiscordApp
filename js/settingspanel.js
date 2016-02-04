@@ -132,15 +132,13 @@ function SaveJSONSettings() {
     var _dataPath = os == "win32" ? process.env.APPDATA : os == 'darwin' ? process.env.HOME + '/Library/Preferences' : '/var/local';
     _dataPath += "/BetterDiscord/settings/";
     var file = _dataPath + "Settings.json";
-    var settingsjson = fs.open(file, 'w');
     var data = [{    "bdags0": bdags0,    "bdags1": bdags1,    "bdags2": bdags2,    "bdags4": bdags4,    "bdags3": bdags3,    "bdaes0": bdaes0,    "bdaes7": bdaes7,    "bdaes1": bdaes1,    "bdaes2": bdaes2,    "bdaes3": bdaes3,    "bdaes4": bdaes4,    "bdaes5": bdaes5,    "bdaes6": bdaes6}];
-    fs.writeFile(file, data);
-    if(fs.stats.isFile(file)) {
-        console.log("Settings Exported Successfully.");
+    if(fs.stats.isDirectory(_dataPath)) {
+        fs.writeFile(file, data);
     }
-    else
-    {
-        console.log("Failed to Export Settings");
+    else {
+        fs.mkdir(_dataPath, function(e) {});
+        fs.writeFile(file, data);
     }
 }
 
