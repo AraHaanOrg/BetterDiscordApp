@@ -132,7 +132,7 @@ function SaveJSONSettings() {
     var _dataPath = os == "win32" ? process.env.APPDATA : os == 'darwin' ? process.env.HOME + '/Library/Preferences' : '/var/local';
     _dataPath += "/BetterDiscord/settings/";
     var file = _dataPath + "Settings.json";
-    var fsstat = fs.stat(_dataPath + "Settings.json", function(err, stats) {})
+    var fsstat = fs.stat("" + process.env.APPDATA + "/BetterDiscord/settings/Settings.json", function(err, stats) {})
     var data = [{    "bdags0": '"' + bdags0 + '"',    "bdags1": '"' + bdags1 + '"',    "bdags2": '"' + bdags2 + '"',    "bdags4": '"' + bdags4 + '"',    "bdags3": '"' + bdags3 + '"',    "bdaes0": '"' + bdaes0 + '"',    "bdaes7": '"' + bdaes7 + '"',    "bdaes1": '"' + bdaes1 + '"',    "bdaes2": '"' + bdaes2 + '"',    "bdaes3": '"' + bdaes3 + '"',    "bdaes4": '"' + bdaes4 + '"',    "bdaes5": '"' + bdaes5 + '"',    "bdaes6": '"' + bdaes6 + '"',    "bdcustomcss": '"' + customcss + '"'}];
     if(fsstat.isDirectory) {
         fs.writeFile(file, data);
@@ -150,39 +150,37 @@ function LoadJSONSettings() {
     var file = _dataPath + "Settings.json";
     var self = this;
     var settingsjson;
-    if(fs.stats.isFile(_dataPath + "Settings.json")) {
-        fs.readFile(file, function read(err, data) {
-            settingsjson = data;
-        });
-        var bdags0 = settingsjson.deserializedjson["bdags0"];
-        var bdags1 = settingsjson.deserializedjson["bdags1"];
-        var bdags2 = settingsjson.deserializedjson["bdags2"];
-        var bdags4 = settingsjson.deserializedjson["bdags4"];
-        var bdags3 = settingsjson.deserializedjson["bdags3"];
-        var bdaes0 = settingsjson.deserializedjson["bdaes0"];
-        var bdaes7 = settingsjson.deserializedjson["bdaes7"];
-        var bdaes1 = settingsjson.deserializedjson["bdaes1"];
-        var bdaes2 = settingsjson.deserializedjson["bdaes2"];
-        var bdaes3 = settingsjson.deserializedjson["bdaes3"];
-        var bdaes4 = settingsjson.deserializedjson["bdaes4"];
-        var bdaes5 = settingsjson.deserializedjson["bdaes5"];
-        var bdaes6 = settingsjson.deserializedjson["bdaes6"];
-        var customcss = settingsjson.deserializedjson["bdcustomcss"];
-        localStorage.setItem("bda-gs-0", bdags0);
-        localStorage.setItem("bda-gs-1", bdags1);
-        localStorage.setItem("bda-gs-2", bdags2);
-        localStorage.setItem("bda-gs-4", bdags4);
-        localStorage.setItem("bda-gs-3", bdags3);
-        localStorage.setItem("bda-es-0", bdaes0);
-        localStorage.setItem("bda-es-7", bdaes7);
-        localStorage.setItem("bda-es-1", bdaes1);
-        localStorage.setItem("bda-es-2", bdaes2);
-        localStorage.setItem("bda-es-3", bdaes3);
-        localStorage.setItem("bda-es-4", bdaes4);
-        localStorage.setItem("bda-es-5", bdaes5);
-        localStorage.setItem("bda-es-6", bdaes6);
-        self.applyCustomCss(customcss);
-    }
+    fs.readFile(file, function read(err, data) {
+        settingsjson = data;
+    });
+    var bdags0 = settingsjson.deserializedjson["bdags0"];
+    var bdags1 = settingsjson.deserializedjson["bdags1"];
+    var bdags2 = settingsjson.deserializedjson["bdags2"];
+    var bdags4 = settingsjson.deserializedjson["bdags4"];
+    var bdags3 = settingsjson.deserializedjson["bdags3"];
+    var bdaes0 = settingsjson.deserializedjson["bdaes0"];
+    var bdaes7 = settingsjson.deserializedjson["bdaes7"];
+    var bdaes1 = settingsjson.deserializedjson["bdaes1"];
+    var bdaes2 = settingsjson.deserializedjson["bdaes2"];
+    var bdaes3 = settingsjson.deserializedjson["bdaes3"];
+    var bdaes4 = settingsjson.deserializedjson["bdaes4"];
+    var bdaes5 = settingsjson.deserializedjson["bdaes5"];
+    var bdaes6 = settingsjson.deserializedjson["bdaes6"];
+    var customcss = settingsjson.deserializedjson["bdcustomcss"];
+    localStorage.setItem("bda-gs-0", bdags0);
+    localStorage.setItem("bda-gs-1", bdags1);
+    localStorage.setItem("bda-gs-2", bdags2);
+    localStorage.setItem("bda-gs-4", bdags4);
+    localStorage.setItem("bda-gs-3", bdags3);
+    localStorage.setItem("bda-es-0", bdaes0);
+    localStorage.setItem("bda-es-7", bdaes7);
+    localStorage.setItem("bda-es-1", bdaes1);
+    localStorage.setItem("bda-es-2", bdaes2);
+    localStorage.setItem("bda-es-3", bdaes3);
+    localStorage.setItem("bda-es-4", bdaes4);
+    localStorage.setItem("bda-es-5", bdaes5);
+    localStorage.setItem("bda-es-6", bdaes6);
+    self.applyCustomCss(customcss);
 }
 
 SettingsPanel.prototype.updateSetting = function(checkbox) {
