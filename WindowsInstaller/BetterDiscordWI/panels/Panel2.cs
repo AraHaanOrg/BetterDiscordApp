@@ -254,7 +254,9 @@ namespace BetterDiscordWI.panels
                                 }
                                 else
                                 {
-                                    AppendLog("Discord Must have updated and might not work now.Please Ask the Installer Dev to fix this.");
+                                    AppendLog("Discord must have updated and might not work now. Please Ask the Installer Dev to fix this.");
+                                    errors = 1;
+                                    Finalize(errors);
                                 }
                             }
                             if (GetParent().DiscordPath.Contains("DiscordCanary\\"))
@@ -275,7 +277,9 @@ namespace BetterDiscordWI.panels
                                 }
                                 else
                                 {
-                                    AppendLog("DiscordCanary Must have updated and might not work now.Please Ask the Installer Dev to fix this.");
+                                    AppendLog("Discord must have updated and might not work now. Please Ask the Installer Dev to fix this.");
+                                    errors = 1;
+                                    Finalize(errors);
                                 }
                             }
                             if (GetParent().DiscordPath.Contains("DiscordPTB\\"))
@@ -297,7 +301,9 @@ namespace BetterDiscordWI.panels
                                 }
                                 else
                                 {
-                                    AppendLog("DiscordPTB Must have updated and might not work now.Please Ask the Installer Dev to fix this.");
+                                    AppendLog("Discord must have updated and might not work now. Please Ask the Installer Dev to fix this.");
+                                    errors = 1;
+                                    Finalize(errors);
                                 }
                             }
                         }
