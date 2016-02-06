@@ -277,7 +277,7 @@ namespace BetterDiscordWI.panels
                                 }
                                 else
                                 {
-                                    AppendLog("Discord must have updated and might not work now. Please Ask the Installer Dev to fix this.");
+                                    AppendLog("DiscordCanary must have updated and might not work now. Please Ask the Installer Dev to fix this.");
                                     errors = 1;
                                     Finalize(errors);
                                 }
@@ -301,7 +301,7 @@ namespace BetterDiscordWI.panels
                                 }
                                 else
                                 {
-                                    AppendLog("Discord must have updated and might not work now. Please Ask the Installer Dev to fix this.");
+                                    AppendLog("DiscordPTB must have updated and might not work now. Please Ask the Installer Dev to fix this.");
                                     errors = 1;
                                     Finalize(errors);
                                 }
