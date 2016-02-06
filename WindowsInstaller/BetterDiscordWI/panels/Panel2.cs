@@ -127,7 +127,7 @@ namespace BetterDiscordWI.panels
 
                 while (Directory.Exists(dir))
                 {
-                    Debug.Print("Waiting for direl");
+                    Debug.Print("Waiting for dirdel");
                     Thread.Sleep(100);
                 }
 
@@ -142,7 +142,7 @@ namespace BetterDiscordWI.panels
 
                 while (Directory.Exists(dir))
                 {
-                    Debug.Print("Waiting for direl");
+                    Debug.Print("Waiting for dirdel");
                     Thread.Sleep(100);
                 }
 
@@ -162,9 +162,47 @@ namespace BetterDiscordWI.panels
                 }
                 catch
                 {
-                    AppendLog("Error Extracting app.asar: Newtonsoft.Json.dll might not be present in the Installer Folder. Installation cannot Continue.");
-                    errors = 1;
-                    Finalize(errors);
+                    if (File.Exists(Application.StartupPath + "\\Newtonsoft.Json.dll"))
+                    {
+                        if (File.Exists(Application.StartupPath + "\\asardotnet.dll"))
+                        {
+                            AppendLog("Error Extracting app.asar: Unknown Error. Installation cannot Continue. Maybe JsonReaderException? or Something else like AccessDeniedException? Is Discord Running as Admin or something?");
+                            errors = 1;
+                            Finalize(errors);
+                        }
+                        else
+                        {
+                            AppendLog("Error Extracting app.asar: asardotnet.dll might not be present in the Installer Folder. Installation cannot Continue.");
+                            errors = 1;
+                            Finalize(errors);
+                        }
+                    }
+                    else
+                    {
+                        if (File.Exists(Application.StartupPath + "\\asardotnet.dll"))
+                        {
+                            AppendLog("Error Extracting app.asar: Newtonsoft.Json.dll might not be present in the Installer Folder. Installation cannot Continue.");
+                            errors = 1;
+                            Finalize(errors);
+                        }
+                        else
+                        {
+                            AppendLog("Error Extracting app.asar: Newtonsoft.Json.dll might not be present in the Installer Folder. Installation cannot Continue.");
+                            AppendLog("Error Extracting app.asar: asardotnet.dll might not be present in the Installer Folder. Installation cannot Continue.");
+                            errors = 2;
+                            Finalize(errors);
+                        }
+                    }
+                    if (File.Exists(Application.StartupPath + "\\asardotnet.dll"))
+                    {
+                        //Do nothing because the file exists.
+                    }
+                    else
+                    {
+                        AppendLog("Error Extracting app.asar: asardotnet.dll might not be present in the Installer Folder. Installation cannot Continue.");
+                        errors = 1;
+                        Finalize(errors);
+                    }
                 }
             });
             
@@ -204,15 +242,19 @@ namespace BetterDiscordWI.panels
                                 {
                                     lines.Add(line);
                                     lines.Add("var _betterDiscord = require('betterdiscord');");
-                                }
-                                else if (line.Contains("mainWindow = new _BrowserWindow2"))
-                                {
-                                    lines.Add(line);
-                                    lines.Add(File.ReadAllText("splice"));
+                                    if (line.Contains("mainWindow = new _BrowserWindow2"))
+                                    {
+                                        lines.Add(line);
+                                        lines.Add(File.ReadAllText("splice"));
+                                    }
+                                    else
+                                    {
+                                        lines.Add(line);
+                                    }
                                 }
                                 else
                                 {
-                                    lines.Add(line);
+                                    AppendLog("Discord Must have updated and might not work now.Please Ask the Installer Dev to fix this.");
                                 }
                             }
                             if (GetParent().DiscordPath.Contains("DiscordCanary\\"))
@@ -221,15 +263,19 @@ namespace BetterDiscordWI.panels
                                 {
                                     lines.Add(line);
                                     lines.Add("var _betterDiscord = require('betterdiscord');");
-                                }
-                                else if (line.Contains("mainWindow = new _BrowserWindow2"))
-                                {
-                                    lines.Add(line);
-                                    lines.Add(File.ReadAllText("splice"));
+                                    if (line.Contains("mainWindow = new _BrowserWindow2"))
+                                    {
+                                        lines.Add(line);
+                                        lines.Add(File.ReadAllText("splice"));
+                                    }
+                                    else
+                                    {
+                                        lines.Add(line);
+                                    }
                                 }
                                 else
                                 {
-                                    lines.Add(line);
+                                    AppendLog("DiscordCanary Must have updated and might not work now.Please Ask the Installer Dev to fix this.");
                                 }
                             }
                             if (GetParent().DiscordPath.Contains("DiscordPTB\\"))
@@ -238,16 +284,20 @@ namespace BetterDiscordWI.panels
                                 {
                                     lines.Add(line);
                                     lines.Add("var _betterDiscord = require('betterdiscord');");
-                                }
-                                //"mainWindow = new _browserWindow2" was changed in DiscordPTB v0.0.6
-                                else if (line.Contains("mainWindow = new _electron.BrowserWindow"))
-                                {
-                                    lines.Add(line);
-                                    lines.Add(File.ReadAllText("splice"));
+                                    //"mainWindow = new _browserWindow2" was changed in DiscordPTB v0.0.6
+                                    if (line.Contains("mainWindow = new _electron.BrowserWindow"))
+                                    {
+                                        lines.Add(line);
+                                        lines.Add(File.ReadAllText("splice"));
+                                    }
+                                    else
+                                    {
+                                        lines.Add(line);
+                                    }
                                 }
                                 else
                                 {
-                                    lines.Add(line);
+                                    AppendLog("DiscordPTB Must have updated and might not work now.Please Ask the Installer Dev to fix this.");
                                 }
                             }
                         }
