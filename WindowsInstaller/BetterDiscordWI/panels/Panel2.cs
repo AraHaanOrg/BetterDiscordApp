@@ -223,6 +223,7 @@ namespace BetterDiscordWI.panels
 
         private void Splice()
         {
+            int errors = 0;
             String indexloc = GetParent().DiscordPath + "\\resources\\app\\app\\index.js";
 
             Thread t = new Thread(() =>
@@ -317,7 +318,6 @@ namespace BetterDiscordWI.panels
                 
                 AppendLog("Finished installation, verifying installation...");
 
-                int errors = 0;
 
                 String curPath = GetParent().DiscordPath + "\\resources\\app\\app\\index.js";
                 
