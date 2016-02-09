@@ -253,12 +253,12 @@ namespace BetterDiscordWI.panels
                                         lines.Add(line);
                                     }
                                 }
-                                else
-                                {
-                                    AppendLog("Discord must have updated and might not work now. Please Ask the Installer Dev to fix this.");
-                                    errors = 1;
-                                    Finalize(errors);
-                                }
+//                                else
+//                                {
+//                                    AppendLog("Discord must have updated and might not work now. Please Ask the Installer Dev to fix this.");
+//                                    errors = 1;
+//                                    Finalize(errors);
+//                                }
                             }
                             if (GetParent().DiscordPath.Contains("DiscordCanary\\"))
                             {
@@ -276,12 +276,12 @@ namespace BetterDiscordWI.panels
                                         lines.Add(line);
                                     }
                                 }
-                                else
-                                {
-                                    AppendLog("DiscordCanary must have updated and might not work now. Please Ask the Installer Dev to fix this.");
-                                    errors = 1;
-                                    Finalize(errors);
-                                }
+//                                else
+//                                {
+//                                    AppendLog("DiscordCanary must have updated and might not work now. Please Ask the Installer Dev to fix this.");
+//                                    errors = 1;
+//                                    Finalize(errors);
+//                                }
                             }
                             if (GetParent().DiscordPath.Contains("DiscordPTB\\"))
                             {
@@ -300,12 +300,12 @@ namespace BetterDiscordWI.panels
                                         lines.Add(line);
                                     }
                                 }
-                                else
-                                {
-                                    AppendLog("DiscordPTB must have updated and might not work now. Please Ask the Installer Dev to fix this.");
-                                    errors = 1;
-                                    Finalize(errors);
-                                }
+//                                else
+//                                {
+//                                    AppendLog("DiscordPTB must have updated and might not work now. Please Ask the Installer Dev to fix this.");
+//                                    errors = 1;
+//                                    Finalize(errors);
+//                                }
                             }
                         }
                     }
