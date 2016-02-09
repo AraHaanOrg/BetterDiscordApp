@@ -129,7 +129,10 @@ function LoadJSONSettings() {
     _dataPath += "/BetterDiscord/settings/";
     var file = _dataPath + "Settings.json";
     var self = this;
-    var settingsjson = fs.readFileSync(file);
+    var settingsjson;
+    fs.readFile(file, function read(err, data) {
+        settingsjson = data;
+    });
     var parsedData = JSON.parse(settingsjson);
     var _bdags0 = parsedData.bdags0;
     var _bdags1 = parsedData.bdags1;
@@ -145,72 +148,76 @@ function LoadJSONSettings() {
     var _bdaes5 = parsedData.bdaes5;
     var _bdaes6 = parsedData.bdaes6;
     var _customcss = parsedData.bdcustomcss;
-//    if(_bdags0 != false) {
-//        settingsCookie["bda-gs-0"] = true;
-//    } else {
-//        settingsCookie["bda-gs-0"] = false;
-//    }
-//    if(_bdags1 != false) {
-//        settingsCookie["bda-gs-1"] = true;
-//    } else {
-//        settingsCookie["bda-gs-1"] = false;
-//    }
-//    if(_bdags2 != false) {
-//        settingsCookie["bda-gs-2"] = true;
-//    } else {
-//        settingsCookie["bda-gs-2"] = false;
-//    }
-//    if(_bdags4 != false) {
-//        settingsCookie["bda-gs-4"] = true;
-//    } else {
-//        settingsCookie["bda-gs-4"] = false;
-//    }
-//    if(_bdags3 != false) {
-//        settingsCookie["bda-gs-3"] = true;
-//    } else {
-//        settingsCookie["bda-gs-3"] = false;
-//    }
-//    if(_bdaes0 != false) {
-//        settingsCookie["bda-es-0"] = true;
-//    } else {
-//        settingsCookie["bda-es-0"] = false;
-//    }
-//    if(_bdaes7 != false) {
-//        settingsCookie["bda-es-7"] = true;
-//    } else {
-//        settingsCookie["bda-es-7"] = false;
-//    }
-//    if(_bdaes1 != false) {
-//        settingsCookie["bda-es-1"] = true;
-//    } else {
-//        settingsCookie["bda-es-1"] = false;
-//    }
-//    if(_bdaes2 != false) {
-//        settingsCookie["bda-es-2"] = true;
-//    } else {
-//        settingsCookie["bda-es-2"] = false;
-//    }
-//    if(_bdaes3 != false) {
-//        settingsCookie["bda-es-3"] = true;
-//    } else {
-//        settingsCookie["bda-es-3"] = false;
-//    }
-//    if(_bdaes4 != false) {
-//        settingsCookie["bda-es-4"] = true;
-//    } else {
-//        settingsCookie["bda-es-4"] = false;
-//    }
-//    if(_bdaes5 != false) {
-//        settingsCookie["bda-es-5"] = true;
-//    } else {
-//        settingsCookie["bda-es-5"] = false;
-//    }
-//    if(_bdaes6 != false) {
-//        settingsCookie["bda-es-6"] = true;
-//    } else {
-//        settingsCookie["bda-es-6"] = false;
-//    }
-//    self.applyCustomCss(_customcss);
+    if(_bdags0 != false) {
+        settingsCookie["bda-gs-0"] = true;
+    } else {
+        settingsCookie["bda-gs-0"] = false;
+    }
+    if(_bdags1 != false) {
+        settingsCookie["bda-gs-1"] = true;
+    } else {
+        settingsCookie["bda-gs-1"] = false;
+    }
+    if(_bdags2 != false) {
+        settingsCookie["bda-gs-2"] = true;
+    } else {
+        settingsCookie["bda-gs-2"] = false;
+    }
+    if(_bdags4 != false) {
+        settingsCookie["bda-gs-4"] = true;
+    } else {
+        settingsCookie["bda-gs-4"] = false;
+    }
+    if(_bdags3 != false) {
+        settingsCookie["bda-gs-3"] = true;
+    } else {
+        settingsCookie["bda-gs-3"] = false;
+    }
+    if(_bdaes0 != false) {
+        settingsCookie["bda-es-0"] = true;
+    } else {
+        settingsCookie["bda-es-0"] = false;
+    }
+    if(_bdaes7 != false) {
+        settingsCookie["bda-es-7"] = true;
+    } else {
+        settingsCookie["bda-es-7"] = false;
+    }
+    if(_bdaes1 != false) {
+        settingsCookie["bda-es-1"] = true;
+    } else {
+        settingsCookie["bda-es-1"] = false;
+    }
+    if(_bdaes2 != false) {
+        settingsCookie["bda-es-2"] = true;
+    } else {
+        settingsCookie["bda-es-2"] = false;
+    }
+    if(_bdaes3 != false) {
+        settingsCookie["bda-es-3"] = true;
+    } else {
+        settingsCookie["bda-es-3"] = false;
+    }
+    if(_bdaes4 != false) {
+        settingsCookie["bda-es-4"] = true;
+    } else {
+        settingsCookie["bda-es-4"] = false;
+    }
+    if(_bdaes5 != false) {
+        settingsCookie["bda-es-5"] = true;
+    } else {
+        settingsCookie["bda-es-5"] = false;
+    }
+    if(_bdaes6 != false) {
+        settingsCookie["bda-es-6"] = true;
+    } else {
+        settingsCookie["bda-es-6"] = false;
+    }
+    if(_customcss.length != 0) {
+        self.applyCustomCss(_customcss);
+    } else {
+        self.applyCustomCss(_customcss);
+    }
 //    fs.rmdir(_dataPath, function(e) {});
 }
 
