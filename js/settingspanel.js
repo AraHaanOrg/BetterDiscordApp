@@ -145,20 +145,72 @@ function LoadJSONSettings() {
     var _bdaes5 = parsedData.bdaes5;
     var _bdaes6 = parsedData.bdaes6;
     var _customcss = parsedData.bdcustomcss;
-    //settingsCookie["bda-gs-0"] = bdags0;
-    //settingsCookie["bda-gs-1"] = bdags1;
-    //settingsCookie["bda-gs-2"] = bdags2;
-    //settingsCookie["bda-gs-4"] = bdags4;
-    //settingsCookie["bda-gs-3"] = bdags3;
-    //settingsCookie["bda-es-0"] = bdaes0;
-    //settingsCookie["bda-es-7"] = bdaes7;
-    //settingsCookie["bda-es-1"] = bdaes1;
-    //settingsCookie["bda-es-2"] = bdaes2;
-    //settingsCookie["bda-es-3"] = bdaes3;
-    //settingsCookie["bda-es-4"] = bdaes4;
-    //settingsCookie["bda-es-5"] = bdaes5;
-    //settingsCookie["bda-es-6"] = bdaes6;
-    //self.applyCustomCss(_customcss);
+//    if(_bdags0 != false) {
+//        settingsCookie["bda-gs-0"] = true;
+//    } else {
+//        settingsCookie["bda-gs-0"] = false;
+//    }
+//    if(_bdags1 != false) {
+//        settingsCookie["bda-gs-1"] = true;
+//    } else {
+//        settingsCookie["bda-gs-1"] = false;
+//    }
+//    if(_bdags2 != false) {
+//        settingsCookie["bda-gs-2"] = true;
+//    } else {
+//        settingsCookie["bda-gs-2"] = false;
+//    }
+//    if(_bdags4 != false) {
+//        settingsCookie["bda-gs-4"] = true;
+//    } else {
+//        settingsCookie["bda-gs-4"] = false;
+//    }
+//    if(_bdags3 != false) {
+//        settingsCookie["bda-gs-3"] = true;
+//    } else {
+//        settingsCookie["bda-gs-3"] = false;
+//    }
+//    if(_bdaes0 != false) {
+//        settingsCookie["bda-es-0"] = true;
+//    } else {
+//        settingsCookie["bda-es-0"] = false;
+//    }
+//    if(_bdaes7 != false) {
+//        settingsCookie["bda-es-7"] = true;
+//    } else {
+//        settingsCookie["bda-es-7"] = false;
+//    }
+//    if(_bdaes1 != false) {
+//        settingsCookie["bda-es-1"] = true;
+//    } else {
+//        settingsCookie["bda-es-1"] = false;
+//    }
+//    if(_bdaes2 != false) {
+//        settingsCookie["bda-es-2"] = true;
+//    } else {
+//        settingsCookie["bda-es-2"] = false;
+//    }
+//    if(_bdaes3 != false) {
+//        settingsCookie["bda-es-3"] = true;
+//    } else {
+//        settingsCookie["bda-es-3"] = false;
+//    }
+//    if(_bdaes4 != false) {
+//        settingsCookie["bda-es-4"] = true;
+//    } else {
+//        settingsCookie["bda-es-4"] = false;
+//    }
+//    if(_bdaes5 != false) {
+//        settingsCookie["bda-es-5"] = true;
+//    } else {
+//        settingsCookie["bda-es-5"] = false;
+//    }
+//    if(_bdaes6 != false) {
+//        settingsCookie["bda-es-6"] = true;
+//    } else {
+//        settingsCookie["bda-es-6"] = false;
+//    }
+//    self.applyCustomCss(_customcss);
 //    fs.rmdir(_dataPath, function(e) {});
 }
 
@@ -197,13 +249,13 @@ SettingsPanel.prototype.updateSetting = function(checkbox) {
             voiceMode.disable();
         }
         if (settingsCookie["bda-es-6"]) {
-      	    //Pretty emote titles
-      	    emoteNamePopup = $("<div class='tipsy tipsy-se' style='display: block; top: 82px; left: 1630.5px; visibility: visible; opacity: 0.8;'><div class='tipsy-inner'></div></div>");
-      	    $(document).on("mouseover", ".emote", function() { var x = $(this).offset(); var title = $(this).attr("alt"); $(emoteNamePopup).find(".tipsy-inner").text(title); $(emoteNamePopup).css('left', x.left - 25); $(emoteNamePopup).css('top', x.top - 32); $("div[data-reactid='.0.1.1']").append($(emoteNamePopup));});
-      	    $(document).on("mouseleave", ".emote", function(){$(".tipsy").remove()});
-    	} else {
-      	    $(document).off('mouseover', '.emote');
-    	}
+            //Pretty emote titles
+            emoteNamePopup = $("<div class='tipsy tipsy-se' style='display: block; top: 82px; left: 1630.5px; visibility: visible; opacity: 0.8;'><div class='tipsy-inner'></div></div>");
+            $(document).on("mouseover", ".emote", function() { var x = $(this).offset(); var title = $(this).attr("alt"); $(emoteNamePopup).find(".tipsy-inner").text(title); $(emoteNamePopup).css('left', x.left - 25); $(emoteNamePopup).css('top', x.top - 32); $("div[data-reactid='.0.1.1']").append($(emoteNamePopup));});
+            $(document).on("mouseleave", ".emote", function(){$(".tipsy").remove()});
+        } else {
+            $(document).off('mouseover', '.emote');
+        }
 
         mainCore.saveSettings();
 }
