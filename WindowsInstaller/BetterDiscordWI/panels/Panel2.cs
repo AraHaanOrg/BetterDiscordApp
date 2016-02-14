@@ -60,10 +60,64 @@ namespace BetterDiscordWI.panels
 
         private void CreateDirectories()
         {
+            int errors = 0;
             Thread t = new Thread(() =>
             {
                 _dataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BetterDiscord";
                 _tempPath = _dataPath + "\\temp";
+                AppendLog("Deleting old cached files");
+                try
+                {
+                    if (File.Exists(_dataPath + "\\emotes_bttv.json"))
+                    {
+                        File.Delete(_dataPath + "\\emotes_bttv.json");
+                    }
+                    if (File.Exists(_dataPath + "\\emotes_bttv_2.json"))
+                    {
+                        File.Delete(_dataPath + "\\emotes_bttv_2.json");
+                    }
+                    if (File.Exists(_dataPath + "\\emotes_ffz.json")) {
+                        File.Delete(_dataPath + "\\emotes_ffz.json");
+                    }
+                    if (File.Exists(_dataPath + "\\emotes_twitch_global.json")) {
+                        File.Delete(_dataPath + "\\emotes_twitch_global.json");
+                    }
+                    if (File.Exists(_dataPath + "\\emotes_twitch_subscriber.json")) {
+                        File.Delete(_dataPath + "\\emotes_twitch_subscriber.json");
+                    }
+                    if (File.Exists(_dataPath + "\\user.json")) {
+                        File.Delete(_dataPath + "\\user.json");
+                    }
+                } catch {
+                    AppendLog("Failed to delete one or more cached files");
+                    errors = 1;
+                    Finalize(errors);
+                }
+                AppendLog("Downloading new cache files");
+                try
+                {
+                    if (!File.Exists(_dataPath + "\\emotes_bttv.json"))
+                    {
+                        DownloadEmoteJSON("emotes_bttv.json", "https://api.betterttv.net/emotes");
+                    }
+                    if (!File.Exists(_dataPath + "\\emotes_bttv_2.json"))
+                    {
+                        DownloadEmoteJSON("emotes_bttv_2.json", "https://raw.githubusercontent.com/AraHaan/BetterDiscordApp/test/data/emotedata_bttv.json'");
+                    }
+                    if (!File.Exists(_dataPath + "\\emotes_ffz.json")) {
+                        DownloadEmoteJSON("emotes_ffz.json", "https://raw.githubusercontent.com/AraHaan/BetterDiscordApp/test/data/emotedata_ffz.json");
+                    }
+                    if (!File.Exists(_dataPath + "\\emotes_twitch_global.json")) {
+                        DownloadEmoteJSON("emotes_twitch_global.json", "https://twitchemotes.com/api_cache/v2/global.json");
+                    }
+                    if (!File.Exists(_dataPath + "\\emotes_twitch_subscriber.json")) {
+                        DownloadEmoteJSON("emotes_twitch_subscriber.json", "https://twitchemotes.com/api_cache/v2/subscriber.json");
+                    }
+                } catch {
+                    AppendLog("Failed to download one or more cached files");
+                    errors = 1;
+                    Finalize(errors);
+                }
 
 
                 if (Directory.Exists(_tempPath))
@@ -152,13 +206,20 @@ namespace BetterDiscordWI.panels
 
                 try
                 {
-                    AppendLog("Extracting app.asar");
-                    AsarArchive archive = new AsarArchive(GetParent().DiscordPath + "\\resources\\app.asar");
+                    if(File.Exists(GetParent().DiscordPath + "\\resources\\app.asar"))
+                    {
+                        AppendLog("Extracting app.asar");
+                        AsarArchive archive = new AsarArchive(GetParent().DiscordPath + "\\resources\\app.asar");
 
-                    AsarExtractor extractor = new AsarExtractor();
-                    extractor.ExtractAll(archive, GetParent().DiscordPath + "\\resources\\app\\");
+                        AsarExtractor extractor = new AsarExtractor();
 
-                    Splice();
+                        extractor.ExtractAll(archive, GetParent().DiscordPath + "\\resources\\app\\");
+                        Splice();
+                    } else {
+                        AppendLog("Error: app.asar does not exist. Installation cannot Continue.");
+                        errors = 1;
+                        Finalize(errors);
+                    }
                 }
                 catch
                 {
@@ -221,6 +282,16 @@ namespace BetterDiscordWI.panels
             webClient.DownloadFile(new Uri(url), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BetterDiscord\\temp\\" + resource);
         }
 
+        private void DownloadEmoteJSON(String jsonfile, String url)
+        {
+            AppendLog("Downloading JSON: " + jsonfile);
+
+            WebClient webClient = new WebClient();
+            webClient.Headers["User-Agent"] = "Mozilla/5.0";
+            
+            webClient.DownloadFile(new Uri(url), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BetterDiscord\\" + jsonfile);
+        }
+
         private void Splice()
         {
             int errors = 0;
@@ -239,11 +310,11 @@ namespace BetterDiscordWI.panels
                         {
                             if (GetParent().DiscordPath.Contains("Discord\\"))
                             {
-                                if (line.Contains("var _overlay2"))
+                                if (line.Contains("var _discord_overlay2"))
                                 {
                                     lines.Add(line);
                                     lines.Add("var _betterDiscord = require('betterdiscord');");
-                                    if (line.Contains("mainWindow = new _BrowserWindow2"))
+                                    if (line.Contains("mainWindow = new _electron.BrowserWindow"))
                                     {
                                         lines.Add(line);
                                         lines.Add(File.ReadAllText("splice"));
@@ -262,11 +333,11 @@ namespace BetterDiscordWI.panels
                             }
                             if (GetParent().DiscordPath.Contains("DiscordCanary\\"))
                             {
-                                if (line.Contains("var _overlay2"))
+                                if (line.Contains("var _discord_overlay2"))
                                 {
                                     lines.Add(line);
                                     lines.Add("var _betterDiscord = require('betterdiscord');");
-                                    if (line.Contains("mainWindow = new _BrowserWindow2"))
+                                    if (line.Contains("mainWindow = new _electron.BrowserWindow"))
                                     {
                                         lines.Add(line);
                                         lines.Add(File.ReadAllText("splice"));
@@ -285,7 +356,7 @@ namespace BetterDiscordWI.panels
                             }
                             if (GetParent().DiscordPath.Contains("DiscordPTB\\"))
                             {
-                                if (line.Contains("var _discord_overlay2"))
+                                if (line.Contains("var _singleInstance2"))
                                 {
                                     lines.Add(line);
                                     lines.Add("var _betterDiscord = require('betterdiscord');");

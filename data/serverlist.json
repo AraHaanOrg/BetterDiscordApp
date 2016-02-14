@@ -273,6 +273,13 @@
       "language": "EN",
       "title": "Evolve"
     },
+    "FIFA": {
+      "code": "0npfNGZdJzQwQWfH",
+      "description": "FIFA Community",
+      "icon": null,
+      "language": "EN",
+      "title": "FIFA"
+    },
     "FFXIV (chaos)XIV Cerberus": {
       "code": "0ZxYbZOJBFGPHFCA",
       "description": "FFXIV (chaos)XIV Cerberus",
@@ -391,6 +398,13 @@
       "icon": null,
       "language": "EN",
       "title": "Japanese Media Management"
+    },
+    "Kantai Collection": {
+      "code": "0eyxqn2G56wtSSlx",
+      "description": "Kantai Collection",
+      "icon": null,
+      "language": "EN",
+      "title": "Kantai Collection"
     },
 	"KappaPride": {
 	  "code": "0ijf4nNsflGI8zYR",
@@ -832,13 +846,20 @@
       "icon": null,
       "language": "EN",
       "title": "We didnt name this server at all"
-  },
-    "[Division]" {
+    },
+    "Metal Gear Network": {
+      "code": "0PsGOLmD8akgwIB0",
+      "description": "Metal Gear Network // Metal Gear Series as well as games in the Konami/Kojima universe",
+      "icon": null,
+      "language": "EN",
+      "title": "Metal Gear Network"
+    },
+    "[Division]": {
       "code": "0ZuJtFPiGu0YtDjO",
       "description": "Void Elsword Guild Server.",
       "icon": null,
       "language": "EN",
       "title": "Division"
-  }
+    }
   }
 }

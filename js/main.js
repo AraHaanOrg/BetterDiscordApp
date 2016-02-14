@@ -7,7 +7,7 @@
  */
 var settingsPanel, emoteModule, utils, quickEmoteMenu, opublicServers, voiceMode, pluginModule, themeModule;
 var jsVersion = 1.57;
-var supportedVersion = "0.2.5";
+var supportedVersion = "0.2.6";
 
 var mainObserver;
 
@@ -84,6 +84,11 @@ var bdchangelog = {
         "ignore": {
             "title": "Ignore User!",
             "text": "Ignore users you don't like!",
+            "img": ""
+        },
+        "Settings": {
+            "title": "Save/Load settings!",
+            "text": "Save and Load your BetterDiscord Settings.",
             "img": ""
         }
     }
