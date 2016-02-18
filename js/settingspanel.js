@@ -129,11 +129,7 @@ function LoadJSONSettings() {
     _dataPath += "/BetterDiscord/settings/";
     var file = _dataPath + "Settings.json";
     var self = this;
-    var settingsjson;
-    fs.readFile(file, function read(err, data) {
-        settingsjson = data;
-    });
-    var parsedData = JSON.parse(settingsjson);
+    var parsedData = require(file);
     var _bdags0 = parsedData.bdags0;
     var _bdags1 = parsedData.bdags1;
     var _bdags2 = parsedData.bdags2;
@@ -148,6 +144,7 @@ function LoadJSONSettings() {
     var _bdaes5 = parsedData.bdaes5;
     var _bdaes6 = parsedData.bdaes6;
     var _customcss = parsedData.bdcustomcss;
+    var _customcss2 = atob(_customcss);
     if(_bdags0 != false) {
         settingsCookie["bda-gs-0"] = true;
     } else {
@@ -213,10 +210,10 @@ function LoadJSONSettings() {
     } else {
         settingsCookie["bda-es-6"] = false;
     }
-    if(_customcss.length != 0) {
-        self.applyCustomCss(_customcss);
+    if(_customcss2.length != 0) {
+        self.applyCustomCss(_customcss2);
     } else {
-        self.applyCustomCss(_customcss);
+        self.applyCustomCss(_customcss2);
     }
 //    fs.rmdir(_dataPath, function(e) {});
 }
