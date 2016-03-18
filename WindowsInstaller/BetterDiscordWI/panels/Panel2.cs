@@ -356,7 +356,7 @@ namespace BetterDiscordWI.panels
                             }
                             if (GetParent().DiscordPath.Contains("DiscordPTB\\"))
                             {
-                                if (line.Contains("var _singleInstance2"))
+                                if (line.Contains("var _ModuleUpdater2"))
                                 {
                                     lines.Add(line);
                                     lines.Add("var _betterDiscord = require('betterdiscord');");
