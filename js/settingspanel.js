@@ -124,101 +124,102 @@ function SaveJSONSettings() {
 }
 
 function LoadJSONSettings() {
-    var os = process.platform;
-    var _dataPath = os == "win32" ? process.env.APPDATA : os == 'darwin' ? process.env.HOME + '/Library/Preferences' : '/var/local';
-    _dataPath += "/BetterDiscord/settings/";
-    var file = _dataPath + "Settings.json";
-    var self = this;
-    var parsedData = require(file);
-    var _bdags0 = parsedData.bdags0;
-    var _bdags1 = parsedData.bdags1;
-    var _bdags2 = parsedData.bdags2;
-    var _bdags4 = parsedData.bdags4;
-    var _bdags3 = parsedData.bdags3;
-    var _bdaes0 = parsedData.bdaes0;
-    var _bdaes7 = parsedData.bdaes7;
-    var _bdaes1 = parsedData.bdaes1;
-    var _bdaes2 = parsedData.bdaes2;
-    var _bdaes3 = parsedData.bdaes3;
-    var _bdaes4 = parsedData.bdaes5;
-    var _bdaes5 = parsedData.bdaes5;
-    var _bdaes6 = parsedData.bdaes6;
-    var _customcss = parsedData.bdcustomcss;
-    var _customcss2 = atob(_customcss);
-    if(_bdags0 != false) {
-        settingsCookie["bda-gs-0"] = true;
-    } else {
-        settingsCookie["bda-gs-0"] = false;
-    }
-    if(_bdags1 != false) {
-        settingsCookie["bda-gs-1"] = true;
-    } else {
-        settingsCookie["bda-gs-1"] = false;
-    }
-    if(_bdags2 != false) {
-        settingsCookie["bda-gs-2"] = true;
-    } else {
-        settingsCookie["bda-gs-2"] = false;
-    }
-    if(_bdags4 != false) {
-        settingsCookie["bda-gs-4"] = true;
-    } else {
-        settingsCookie["bda-gs-4"] = false;
-    }
-    if(_bdags3 != false) {
-        settingsCookie["bda-gs-3"] = true;
-    } else {
-        settingsCookie["bda-gs-3"] = false;
-    }
-    if(_bdaes0 != false) {
-        settingsCookie["bda-es-0"] = true;
-    } else {
-        settingsCookie["bda-es-0"] = false;
-    }
-    if(_bdaes7 != false) {
-        settingsCookie["bda-es-7"] = true;
-    } else {
-        settingsCookie["bda-es-7"] = false;
-    }
-    if(_bdaes1 != false) {
-        settingsCookie["bda-es-1"] = true;
-    } else {
-        settingsCookie["bda-es-1"] = false;
-    }
-    if(_bdaes2 != false) {
-        settingsCookie["bda-es-2"] = true;
-    } else {
-        settingsCookie["bda-es-2"] = false;
-    }
-    if(_bdaes3 != false) {
-        settingsCookie["bda-es-3"] = true;
-    } else {
-        settingsCookie["bda-es-3"] = false;
-    }
-    if(_bdaes4 != false) {
-        settingsCookie["bda-es-4"] = true;
-    } else {
-        settingsCookie["bda-es-4"] = false;
-    }
-    if(_bdaes5 != false) {
-        settingsCookie["bda-es-5"] = true;
-    } else {
-        settingsCookie["bda-es-5"] = false;
-    }
-    if(_bdaes6 != false) {
-        settingsCookie["bda-es-6"] = true;
-    } else {
-        settingsCookie["bda-es-6"] = false;
-    }
-    if(_customcss2.length != 0) {
-        SettingsPanel.prototype.applyCustomCss(_customcss2);
-    } else {
-        SettingsPanel.prototype.applyCustomCss(_customcss2);
-    }
+    //var os = process.platform;
+    //var _dataPath = os == "win32" ? process.env.APPDATA : os == 'darwin' ? process.env.HOME + '/Library/Preferences' : '/var/local';
+    //_dataPath += "/BetterDiscord/settings/";
+    //var file = _dataPath + "Settings.json";
+    //var self = this;
+    //var parsedData = require(file);
+    //var _bdags0 = parsedData.bdags0;
+    //var _bdags1 = parsedData.bdags1;
+    //var _bdags2 = parsedData.bdags2;
+    //var _bdags4 = parsedData.bdags4;
+    //var _bdags3 = parsedData.bdags3;
+    //var _bdaes0 = parsedData.bdaes0;
+    //var _bdaes7 = parsedData.bdaes7;
+    //var _bdaes1 = parsedData.bdaes1;
+    //var _bdaes2 = parsedData.bdaes2;
+    //var _bdaes3 = parsedData.bdaes3;
+    //var _bdaes4 = parsedData.bdaes5;
+    //var _bdaes5 = parsedData.bdaes5;
+    //var _bdaes6 = parsedData.bdaes6;
+    //var _customcss = parsedData.bdcustomcss;
+    //var _customcss2 = atob(_customcss);
+    //if(_bdags0 != false) {
+    //    settingsCookie["bda-gs-0"] = true;
+    //} else {
+    //    settingsCookie["bda-gs-0"] = false;
+    //}
+    //if(_bdags1 != false) {
+    //    settingsCookie["bda-gs-1"] = true;
+    //} else {
+    //    settingsCookie["bda-gs-1"] = false;
+    //}
+    //if(_bdags2 != false) {
+    //    settingsCookie["bda-gs-2"] = true;
+    //} else {
+    //    settingsCookie["bda-gs-2"] = false;
+    //}
+    //if(_bdags4 != false) {
+    //    settingsCookie["bda-gs-4"] = true;
+    //} else {
+    //    settingsCookie["bda-gs-4"] = false;
+    //}
+    //if(_bdags3 != false) {
+    //    settingsCookie["bda-gs-3"] = true;
+    //} else {
+    //    settingsCookie["bda-gs-3"] = false;
+    //}
+    //if(_bdaes0 != false) {
+    //    settingsCookie["bda-es-0"] = true;
+    //} else {
+    //    settingsCookie["bda-es-0"] = false;
+    //}
+    //if(_bdaes7 != false) {
+    //    settingsCookie["bda-es-7"] = true;
+    //} else {
+    //    settingsCookie["bda-es-7"] = false;
+    //}
+    //if(_bdaes1 != false) {
+    //    settingsCookie["bda-es-1"] = true;
+    //} else {
+    //    settingsCookie["bda-es-1"] = false;
+    //}
+    //if(_bdaes2 != false) {
+    //    settingsCookie["bda-es-2"] = true;
+    //} else {
+    //    settingsCookie["bda-es-2"] = false;
+    //}
+    //if(_bdaes3 != false) {
+    //    settingsCookie["bda-es-3"] = true;
+    //} else {
+    //    settingsCookie["bda-es-3"] = false;
+    //}
+    //if(_bdaes4 != false) {
+    //    settingsCookie["bda-es-4"] = true;
+    //} else {
+    //    settingsCookie["bda-es-4"] = false;
+    //}
+    //if(_bdaes5 != false) {
+    //    settingsCookie["bda-es-5"] = true;
+    //} else {
+    //    settingsCookie["bda-es-5"] = false;
+    //}
+    //if(_bdaes6 != false) {
+    //    settingsCookie["bda-es-6"] = true;
+    //} else {
+    //    settingsCookie["bda-es-6"] = false;
+    //}
+    //if(_customcss2.length != 0) {
+    //    SettingsPanel.prototype.applyCustomCss(_customcss2);
+    //} else {
+    //    SettingsPanel.prototype.applyCustomCss(_customcss2);
+    //}
 //    fs.rmdir(_dataPath, function(e) {});
+    console.log("This has been temporarily disabled due to isses with things.");
 }
 
-SettingsPanel.prototype.updateSetting = function(checkbox) {
+SettingsPanel.prototype.updateSetting = function(checkbox) {    
         var cb = $(checkbox).children().find('input[type="checkbox"]');
         var enabled = !cb.is(":checked");
         var id = cb.attr("id");
@@ -391,6 +392,10 @@ SettingsPanel.prototype.construct = function() {
     '               </div>' +
     '' +
     '       </div>' +
+        '   <div style="background:#2E3136; color:#ADADAD; height:30px; position:absolute; bottom:0; left:0; right:0;">' +
+        '       <span style="line-height:30px;margin-left:10px;">BetterDiscord v' + version + '(JSv' + jsVersion + ') by Jiiks</span>' +
+        '       <span style="float:right;line-height:30px;margin-right:10px;"><a href="http://betterdiscord.net" target="_blank">BetterDiscord.net</a></span>' +
+        '   </div>' +
     '   </div>' +
     '</div>';
     
