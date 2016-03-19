@@ -459,57 +459,72 @@ var spoilered = [];
 
 EmoteModule.prototype.injectEmote = function(node) {
 
-    if(typeof emotesTwitch === 'undefined') return;
+    if (typeof emotesTwitch === 'undefined') return;
 
-    if(!node.parentElement) return;
+    if (!node.parentElement) return;
 
     var parent = node.parentElement;
 
-    if(parent.tagName != "SPAN") return;
-  
+    if (parent.tagName != "SPAN") return;
+
     var edited = false;
-    
-    if($(parent.parentElement).hasClass("edited")) {
+
+    if ($(parent.parentElement).hasClass("edited")) {
         parent = parent.parentElement.parentElement.firstChild; //:D
         edited = true;
     }
-    
+
     //if(!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) return;
 
     function inject() {
-        if(!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) { return; }
+        if (!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) {
+            return;
+        }
 
         var parentInnerHTML = parent.innerHTML;
+
         var words = parentInnerHTML.split(/\s+/g);
 
-        if(!words) return;
+        if (!words) return;
 
-        words.some(function(word) {
-
-            if(word.slice(0, 4) == "[!s]" ) {
+        words.some(function (word) {
+            if (word.slice(0, 4) == "[!s]") {
 
                 parentInnerHTML = parentInnerHTML.replace("[!s]", "");
                 var markup = $(parent).parent();
                 var reactId = markup.attr("data-reactid");
-                
-                if(spoilered.indexOf(reactId) > -1) {
+
+                if (spoilered.indexOf(reactId) > -1) {
                     return;
                 }
 
                 markup.addClass("spoiler");
-                markup.on("click", function() {
+                markup.on("click", function () {
                     $(this).removeClass("spoiler");
                     spoilered.push($(this).attr("data-reactid"));
                 });
 
                 return;
             }
-        
-            if(word.length < 4) {
+
+            if (word.length < 4) {
                 return;
             }
 
-            if($.inArray(word, bemotes) != -1) return;
+            if (word == "ClauZ") {
+                parentInnerHTML = parentInnerHTML.replace("ClauZ", '<img src="https://cdn.frankerfacez.com/emoticon/70852/1" style="width:25px; transform:translate(-29px, -14px);"></img>');
+                return;
+            }
+
+            if ($.inArray(word, bemotes) != -1) return;
+
+            if (emotesTwitch.emotes.hasOwnProperty(word)) {
+                var len = Math.round(word.length / 4);
+                var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
+                var url = twitchEmoteUrlStart + emotesTwitch.emotes[word].image_id + twitchEmoteUrlEnd;
+                parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                return;
+            }
 
             if (subEmotesTwitch.hasOwnProperty(word)) {
                 var len = Math.round(word.length / 4);
@@ -524,8 +539,8 @@ EmoteModule.prototype.injectEmote = function(node) {
                     var len = Math.round(word.length / 4);
                     var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
                     var url = ffzEmoteUrlStart + emotesFfz[word] + ffzEmoteUrlEnd;
-                    
-                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"'+name+'\", \"'+url+'\");\' class="fav" title="Favorite!" type="button"></div>');
+
+                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                     return;
                 }
             }
@@ -535,31 +550,24 @@ EmoteModule.prototype.injectEmote = function(node) {
                     var len = Math.round(word.length / 4);
                     var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
                     var url = emotesBTTV[word];
-                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"'+name+'\", \"'+url+'\");\' class="fav" title="Favorite!" type="button"></div>');
+                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                     return;
                 }
             }
-              
-            if(typeof emotesBTTV2 !== 'undefined' && settingsCookie["bda-es-2"]) {
-                if(emotesBTTV2.hasOwnProperty(word)) {
+
+            if (typeof emotesBTTV2 !== 'undefined' && settingsCookie["bda-es-2"]) {
+                if (emotesBTTV2.hasOwnProperty(word)) {
                     var len = Math.round(word.length / 4);
                     var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
-                    var url = bttvEmoteUrlStart + emotesBTTV2[word]  + bttvEmoteUrlEnd;
-                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"'+name+'\", \"'+url+'\");\' class="fav" title="Favorite!" type="button"></div>');
+                    var url = bttvEmoteUrlStart + emotesBTTV2[word] + bttvEmoteUrlEnd;
+                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                     return;
                 }
             }
 
-            if (subEmotesTwitch.hasOwnProperty(word)) {
-                var len = Math.round(word.length / 4);
-                var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
-                var url = twitchEmoteUrlStart + subEmotesTwitch[word] + twitchEmoteUrlEnd;
-                parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"'+name+'\", \"'+url+'\");\' class="fav" title="Favorite!" type="button"></div>');
-                return;
-            }
         });
 
-        if(parent.parentElement == null) return;
+        if (parent.parentElement == null) return;
 
         var oldHeight = parent.parentElement.offsetHeight;
         parent.innerHTML = parentInnerHTML.replace(new RegExp("\uFDD9", "g"), "");
@@ -568,14 +576,14 @@ EmoteModule.prototype.injectEmote = function(node) {
         //Scrollfix
         var scrollPane = $(".scroller.messages").first();
         scrollPane.scrollTop(scrollPane.scrollTop() + (newHeight - oldHeight));
-   } 
-   
-   if(edited) {
-       setTimeout(inject, 250);
-   } else {
-       inject();
-   }
-   
+    }
+
+    if (edited) {
+        setTimeout(inject, 250);
+    } else {
+        inject();
+    }
+
 };
 
 EmoteModule.prototype.autoCapitalize = function() {
