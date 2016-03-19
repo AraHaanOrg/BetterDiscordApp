@@ -1,10 +1,15 @@
 # BetterDiscordApp
+
+If you have issues then join the BD Discord server: [Here](https://discord.gg/0Tmfo5ZbORCRqbAd)
+If your Discord breaks then uninstall BD and try again 
+# Do not contact Discord support about BD issues. 
+
 Better Discord App enhances Discord desktop app with new features.
 
 ![ss](http://i.imgur.com/P0XEyp6.jpg)
 
 ## Windows Universal Installer
-* Download the latest installer from https://github.com/Jiiks/BetterDiscordApp/releases/tag/WindowsInstaller0.2
+* Download the latest installer from [releases](https://github.com/Jiiks/BetterDiscordApp/releases)
 * Follow the instructions
 * .NET 4.0 required https://www.microsoft.com/en-us/download/details.aspx?id=30653
 * Windows Installer users asar.net https://github.com/Jiiks/asar.net
@@ -43,7 +48,7 @@ Minimal mode makes elements smaller and hides certain elements.
 Only display voice channels
 
 **Public Servers:**
-A menu for displaying public servers. [Serverlist](https://github.com/Jiiks/BetterDiscordApp/blob/master/serverlist.json)
+A menu for displaying public servers. [Serverlist](https://github.com/Jiiks/BetterDiscordApp/blob/master/data/serverlist.json)
 
 **Custom CSS**
 BetterDiscord supports custom CSS for styling Discord to your liking.
@@ -61,7 +66,7 @@ Add spoilers to your chat, simply add [!s] to your message.
 Save chatlogs locally.(soon)
 
 ## Adding you server to public servers
-Edit the [Serverlist](https://github.com/Jiiks/BetterDiscordApp/blob/master/serverlist.json) and submit a pull request.
+Edit the [Serverlist](https://github.com/Jiiks/BetterDiscordApp/blob/master/data/serverlist.json) and submit a pull request.
 
 ## BetterDiscord Uses the following API's
 * https://twitchemotes.com/apidocs for Twitch emotes
@@ -71,8 +76,6 @@ Edit the [Serverlist](https://github.com/Jiiks/BetterDiscordApp/blob/master/serv
 * MacOS Installer by [Candunc](https://github.com/Candunc) 
 * Emote titles by [pendo324](https://github.com/pendo324)
 * Majority of FFZ emote work by [Pohky] (https://github.com/pohky)
-
-# On connect you will be automatically invited to the BetterDiscord Discord server one time.
 
 ## License
 
