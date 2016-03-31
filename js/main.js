@@ -95,6 +95,8 @@ var bdchangelog = {
 };
 
 var settingsCookie = {};
+var bdaf = false;
+var bdafo = false;
 
 function Core() {}
 
@@ -252,29 +254,29 @@ Core.prototype.initObserver = function () {
                     quickEmoteMenu.obsCallback();
                     voiceMode.obsCallback();
                     if (typeof pluginModule !== "undefined") pluginModule.channelSwitch();
-                    $(".message-group").each(function () {
+                    /*$(".message-group").each(function () {$(".message-group").each(function () {
                         var a = $(this).find(".avatar-large");
                         if (a.length > 0) {
-							try {
+                            try {
                             var b = a.css("background-image").match(/\d+/).toString();
                             if (botlist.indexOf(a) > -1) {
                                 $(this).find(".user-name").addClass("boticon");
                             }
-							}catch(err) {}
+                            }catch(err) {}
                         }
-                    });
+                    });*/
                 }
                 if (mutation.target.getAttribute('class').indexOf('scroller messages') != -1) {
                     var lastMessage = $(".message-group").last();
                     if (lastMessage != undefined) {
-                        var a = lastMessage.find(".avatar-large");
+                        /*var a = lastMessage.find(".avatar-large");
                         if (a.length > 0) {
 							try {
                             if (botlist.indexOf(a.css("background-image").match(/\d+/).toString()) > -1) {
                                 lastMessage.find(".user-name").addClass("boticon");
                             }
 							}catch(err) {}
-                        }
+                        }*/
                     }
                     if (typeof pluginModule !== "undefined") pluginModule.newMessage();
                 }
@@ -466,6 +468,9 @@ EmoteModule.prototype.injectEmote = function(node) {
     var parent = node.parentElement;
 
     if (parent.tagName != "SPAN") return;
+    if (!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) {
+        return;
+    }
 
     var edited = false;
 
@@ -477,12 +482,7 @@ EmoteModule.prototype.injectEmote = function(node) {
     //if(!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) return;
 
     function inject() {
-        if (!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) {
-            return;
-        }
-
         var parentInnerHTML = parent.innerHTML;
-
         var words = parentInnerHTML.split(/\s+/g);
 
         if (!words) return;
@@ -517,8 +517,19 @@ EmoteModule.prototype.injectEmote = function(node) {
             }
 
             if ($.inArray(word, bemotes) != -1) return;
+            var d = new Date();
+            bdaf = (d.getMonth() == 3 && d.getDate() == 1 && !bdafo);
 
             if (emotesTwitch.emotes.hasOwnProperty(word)) {
+                if(bdaf) {
+                    var k = Object.keys(emotesTwitch["emotes"]);
+                    var newWord = k[k.length * Math.random() << 0];
+                    var len = Math.round(newWord.length / 4);
+                    var name = newWord.substr(0, len) + "\uFDD9" + newWord.substr(len, len) + "\uFDD9" + newWord.substr(len * 2, len) + "\uFDD9" + newWord.substr(len * 3);
+                    var url = twitchEmoteUrlStart + emotesTwitch.emotes[newWord].image_id + twitchEmoteUrlEnd;
+                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                    return;
+                }
                 var len = Math.round(word.length / 4);
                 var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
                 var url = twitchEmoteUrlStart + emotesTwitch.emotes[word].image_id + twitchEmoteUrlEnd;
@@ -527,6 +538,15 @@ EmoteModule.prototype.injectEmote = function(node) {
             }
 
             if (subEmotesTwitch.hasOwnProperty(word)) {
+                if(bdaf) {
+                    var k = Object.keys(subEmotesTwitch);
+                    var newWord = k[k.length * Math.random() << 0];
+                    var len = Math.round(newWord.length / 4);
+                    var name = newWord.substr(0, len) + "\uFDD9" + newWord.substr(len, len) + "\uFDD9" + newWord.substr(len * 2, len) + "\uFDD9" + newWord.substr(len * 3);
+                    var url = twitchEmoteUrlStart + subEmotesTwitch[newWord] + twitchEmoteUrlEnd;
+                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                    return;
+                }
                 var len = Math.round(word.length / 4);
                 var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
                 var url = twitchEmoteUrlStart + subEmotesTwitch[word] + twitchEmoteUrlEnd;
@@ -536,10 +556,18 @@ EmoteModule.prototype.injectEmote = function(node) {
 
             if (typeof emotesFfz !== 'undefined' && settingsCookie["bda-es-1"]) {
                 if (emotesFfz.hasOwnProperty(word)) {
+                    if(bdaf) {
+                        var k = Object.keys(emotesFfz);
+                        var newWord = k[k.length * Math.random() << 0];
+                        var len = Math.round(newWord.length / 4);
+                        var name = newWord.substr(0, len) + "\uFDD9" + newWord.substr(len, len) + "\uFDD9" + newWord.substr(len * 2, len) + "\uFDD9" + newWord.substr(len * 3);
+                        var url = ffzEmoteUrlStart + emotesFfz[newWord] + ffzEmoteUrlEnd;
+                        parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                        return;
+                    }
                     var len = Math.round(word.length / 4);
                     var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
                     var url = ffzEmoteUrlStart + emotesFfz[word] + ffzEmoteUrlEnd;
-
                     parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                     return;
                 }
@@ -547,6 +575,15 @@ EmoteModule.prototype.injectEmote = function(node) {
 
             if (typeof emotesBTTV !== 'undefined' && settingsCookie["bda-es-2"]) {
                 if (emotesBTTV.hasOwnProperty(word)) {
+                    if(bdaf) {
+                        var k = Object.keys(emotesBTTV);
+                        var newWord = k[k.length * Math.random() << 0];
+                        var len = Math.round(newWord.length / 4);
+                        var name = newWord.substr(0, len) + "\uFDD9" + newWord.substr(len, len) + "\uFDD9" + newWord.substr(len * 2, len) + "\uFDD9" + newWord.substr(len * 3);
+                        var url = emotesBTTV[newWord];
+                        parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                        return;
+                    }
                     var len = Math.round(word.length / 4);
                     var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
                     var url = emotesBTTV[word];
@@ -557,6 +594,15 @@ EmoteModule.prototype.injectEmote = function(node) {
 
             if (typeof emotesBTTV2 !== 'undefined' && settingsCookie["bda-es-2"]) {
                 if (emotesBTTV2.hasOwnProperty(word)) {
+                    if(bdaf) {
+                        var k = Object.keys(emotesBTTV2);
+                        var newWord = k[k.length * Math.random() << 0];
+                        var len = Math.round(newWord.length / 4);
+                        var name = newWord.substr(0, len) + "\uFDD9" + newWord.substr(len, len) + "\uFDD9" + newWord.substr(len * 2, len) + "\uFDD9" + newWord.substr(len * 3);
+                        var url = bttvEmoteUrlStart + emotesBTTV2[newWord]  + bttvEmoteUrlEnd;
+                        parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                        return;
+                    }
                     var len = Math.round(word.length / 4);
                     var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
                     var url = bttvEmoteUrlStart + emotesBTTV2[word] + bttvEmoteUrlEnd;
@@ -1076,11 +1122,11 @@ SettingsPanel.prototype.init = function() {
 
     if (settingsCookie["bda-es-6"]) {
         //Pretty emote titles
-      	emoteNamePopup = $("<div class='tipsy tipsy-se' style='display: block; top: 82px; left: 1630.5px; visibility: visible; opacity: 0.8;'><div class='tipsy-inner'></div></div>");
-      	$(document).on("mouseover", ".emote", function() { var x = $(this).offset(); var title = $(this).attr("alt"); $(emoteNamePopup).find(".tipsy-inner").text(title); $(emoteNamePopup).css('left', x.left - 25); $(emoteNamePopup).css('top', x.top - 32); $("div[data-reactid='.0.1.1']").append($(emoteNamePopup));});
-      	$(document).on("mouseleave", ".emote", function(){$(".tipsy").remove()});
+        emoteNamePopup = $("<div class='tipsy tipsy-se' style='display: block; top: 82px; left: 1630.5px; visibility: visible; opacity: 0.8;'><div class='tipsy-inner'></div></div>");
+        $(document).on("mouseover", ".emote", function() { var x = $(this).offset(); var title = $(this).attr("alt"); $(emoteNamePopup).find(".tipsy-inner").text(title); $(emoteNamePopup).css('left', x.left - 25); $(emoteNamePopup).css('top', x.top - 32); $("div[data-reactid='.0.1.1']").append($(emoteNamePopup));});
+        $(document).on("mouseleave", ".emote", function(){$(".tipsy").remove()});
     } else {
-      	$(document).off('mouseover', '.emote');
+        $(document).off('mouseover', '.emote');
     }
 };
 
@@ -1088,7 +1134,7 @@ SettingsPanel.prototype.applyCustomCss = function(css) {
     if($("#customcss").length == 0) {
         $("head").append('<style id="customcss"></style>');
     }
-
+    bdafo = (css.indexOf("april2nd") > -1);
     $("#customcss").html(css);
 
     localStorage.setItem("bdcustomcss", btoa(css));
