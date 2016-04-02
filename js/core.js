@@ -1,12 +1,12 @@
 /* BetterDiscordApp Core JavaScript
- * Version: 1.52
+ * Version: 1.53
  * Author: Jiiks | http://jiiks.net
  * Date: 27/08/2015 - 16:36
- * Last Update: 24/010/2015 - 17:27
+ * Last Update: 02/04/2016
  * https://github.com/Jiiks/BetterDiscordApp
  */
 var settingsPanel, emoteModule, utils, quickEmoteMenu, opublicServers, voiceMode, pluginModule, themeModule;
-var jsVersion = 1.57;
+var jsVersion = 1.58;
 var supportedVersion = "0.2.5";
 
 var mainObserver;
@@ -65,34 +65,14 @@ var defaultCookie = {
     "bda-jd": true
 };
 
-var bdchangelog = {
-    "changes": {
-        "api": {
-            "title": "Api Functions!",
-            "text": "New api events!",
-            "img": ""
-        },
-        "dec": {
-            "title": "Decorations&Snow!",
-            "text": "Decorations and snow have been removed.",
-            "img": ""
-        }
-    },
-    "fixes": {
-        "emotes": {
-            "title": "Sub emotes!",
-            "text": "Discord sub emotes are now replaced by BetterDiscord sub emotes and can be favorited!",
-            "img": ""
-        }
-    },
-    "upcoming": {
-        "ignore": {
-            "title": "Ignore User!",
-            "text": "Ignore users you don't like!",
-            "img": ""
-        }
-    }
-};
+ var bdchangelog = {
+     "changes": {
+         "api": {
+            "title": "Emote modifiers!",
+            "text": "You can use the following modifiers to modify emotes: <br> <strong>spin</strong>, <strong>spin2</strong>, <strong>spin3</strong>, <strong>flip</strong>, <strong>pulse</strong>, <strong>spinflip</strong>. <br> Example usage: Kappa:spin",
+             "img": ""
+         }
+     }
 
 var settingsCookie = {};
 var bdaf = false;
@@ -299,7 +279,7 @@ Core.prototype.constructChangelog = function () {
         '  <div class="modal-inner">' +
         '       <div id="bdcl" class="change-log"> ' +
         '           <div class="header">' +
-        '               <strong>What\'s new in BetterDiscord JS v1.53&' + jsVersion + '</strong>' +
+        '               <strong>What\'s new in BetterDiscord JS' + jsVersion + '</strong>' +
         '               <button class="close" onclick=\'$("#bd-wn-modal").remove();\'></button>' +
         '           </div><!--header-->' +
         '           <div class="scroller-wrap">' +
