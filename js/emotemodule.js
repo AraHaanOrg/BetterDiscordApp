@@ -65,7 +65,7 @@ EmoteModule.prototype.getNodes = function(node) {
 var bemotes = [];
 var spoilered = [];
 
-EmoteModule.prototype.injectEmote = function(node) {
+EmoteModule.prototype.injectEmote = function (node) {
 
     if (typeof emotesTwitch === 'undefined') return;
 
@@ -74,6 +74,10 @@ EmoteModule.prototype.injectEmote = function(node) {
     var parent = node.parentElement;
 
     if (parent.tagName != "SPAN") return;
+    if (!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) {
+        return;
+    }
+
 
     var edited = false;
 
@@ -85,12 +89,7 @@ EmoteModule.prototype.injectEmote = function(node) {
     //if(!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) return;
 
     function inject() {
-        if (!$(parent.parentElement).hasClass("markup") && !$(parent.parentElement).hasClass("message-content")) {
-            return;
-        }
-
         var parentInnerHTML = parent.innerHTML;
-
         var words = parentInnerHTML.split(/\s+/g);
 
         if (!words) return;
@@ -126,49 +125,61 @@ EmoteModule.prototype.injectEmote = function(node) {
 
             if ($.inArray(word, bemotes) != -1) return;
 
-            if (emotesTwitch.emotes.hasOwnProperty(word)) {
-                var len = Math.round(word.length / 4);
-                var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
-                var url = twitchEmoteUrlStart + emotesTwitch.emotes[word].image_id + twitchEmoteUrlEnd;
-                parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+            var useEmoteCss = false;
+            var sWord = word;
+            var emoteClass = "";
+            var allowedClasses = ["flip", "spin", "pulse", "spinflip", "spin2", "spin3"];
+            if(word.indexOf(":") > -1) {
+                userEmoteCss = true;
+                sWord = word.split(":")[0];
+                emoteClass = word.split(":")[1];
+                if(allowedClasses.indexOf(emoteClass) < 0) {
+                    emoteClass = "";
+                }
+            }
+
+            if (emotesTwitch.emotes.hasOwnProperty(sWord)) {
+                var len = Math.round(sWord.length / 4);
+                var name = sWord.substr(0, len) + "\uFDD9" + sWord.substr(len, len) + "\uFDD9" + sWord.substr(len * 2, len) + "\uFDD9" + sWord.substr(len * 3);
+                var url = twitchEmoteUrlStart + emotesTwitch.emotes[sWord].image_id + twitchEmoteUrlEnd;
+                parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote emote'+emoteClass+'" alt="' + name + '" src="' + url + '"/><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                 return;
             }
 
-            if (subEmotesTwitch.hasOwnProperty(word)) {
-                var len = Math.round(word.length / 4);
-                var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
-                var url = twitchEmoteUrlStart + subEmotesTwitch[word] + twitchEmoteUrlEnd;
-                parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+            if (subEmotesTwitch.hasOwnProperty(sWord)) {
+                var len = Math.round(sWord.length / 4);
+                var name = sWord.substr(0, len) + "\uFDD9" + sWord.substr(len, len) + "\uFDD9" + sWord.substr(len * 2, len) + "\uFDD9" + sWord.substr(len * 3);
+                var url = twitchEmoteUrlStart + subEmotesTwitch[sWord] + twitchEmoteUrlEnd;
+                parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote emote'+emoteClass+'" alt="' + name + '" src="' + url + '"/><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                 return;
             }
-
+            
             if (typeof emotesFfz !== 'undefined' && settingsCookie["bda-es-1"]) {
-                if (emotesFfz.hasOwnProperty(word)) {
-                    var len = Math.round(word.length / 4);
-                    var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
-                    var url = ffzEmoteUrlStart + emotesFfz[word] + ffzEmoteUrlEnd;
-
-                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                if (emotesFfz.hasOwnProperty(sWord)) {
+                    var len = Math.round(sWord.length / 4);
+                    var name = sWord.substr(0, len) + "\uFDD9" + sWord.substr(len, len) + "\uFDD9" + sWord.substr(len * 2, len) + "\uFDD9" + sWord.substr(len * 3);
+                    var url = ffzEmoteUrlStart + emotesFfz[sWord] + ffzEmoteUrlEnd;
+                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote emote'+emoteClass+'" alt="' + name + '" src="' + url + '"/><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                     return;
                 }
             }
 
             if (typeof emotesBTTV !== 'undefined' && settingsCookie["bda-es-2"]) {
-                if (emotesBTTV.hasOwnProperty(word)) {
-                    var len = Math.round(word.length / 4);
-                    var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
-                    var url = emotesBTTV[word];
-                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                if (emotesBTTV.hasOwnProperty(sWord)) {
+                    var len = Math.round(sWord.length / 4);
+                    var name = sWord.substr(0, len) + "\uFDD9" + sWord.substr(len, len) + "\uFDD9" + sWord.substr(len * 2, len) + "\uFDD9" + sWord.substr(len * 3);
+                    var url = emotesBTTV[sWord];
+                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote emote'+emoteClass+'" alt="' + name + '" src="' + url + '"/><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                     return;
                 }
             }
 
             if (typeof emotesBTTV2 !== 'undefined' && settingsCookie["bda-es-2"]) {
-                if (emotesBTTV2.hasOwnProperty(word)) {
-                    var len = Math.round(word.length / 4);
-                    var name = word.substr(0, len) + "\uFDD9" + word.substr(len, len) + "\uFDD9" + word.substr(len * 2, len) + "\uFDD9" + word.substr(len * 3);
-                    var url = bttvEmoteUrlStart + emotesBTTV2[word] + bttvEmoteUrlEnd;
-                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote" alt="' + name + '" src="' + url + '" /><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
+                if (emotesBTTV2.hasOwnProperty(sWord)) {
+                    var len = Math.round(sWord.length / 4);
+                    var name = sWord.substr(0, len) + "\uFDD9" + sWord.substr(len, len) + "\uFDD9" + sWord.substr(len * 2, len) + "\uFDD9" + sWord.substr(len * 3);
+                    var url = bttvEmoteUrlStart + emotesBTTV2[sWord] + bttvEmoteUrlEnd;
+                    parentInnerHTML = parentInnerHTML.replace(word, '<div class="emotewrapper"><img class="emote emote'+emoteClass+'" alt="' + name + '" src="' + url + '"/><input onclick=\'quickEmoteMenu.favorite(\"' + name + '\", \"' + url + '\");\' class="fav" title="Favorite!" type="button"></div>');
                     return;
                 }
             }

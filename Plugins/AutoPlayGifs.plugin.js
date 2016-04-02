@@ -3,27 +3,15 @@
 var agif = function () {};
 
 agif.prototype.convert = function () {
-	$(".attachment-image").each(function() { 
-        var href = $(this).find("canvas").attr("href"); 
-        if(href != undefined) { 
-            $(this).empty(); 
-			$(this).html('<img src="'+href+'"></img>'); 
-        } 
+    $(".image canvas").each(function() { 
+        var src = $(this).attr("src"); 
+        if(src != undefined) { 
+            $(this).replaceWith('<img src="'+src+'"></img>'); 
+        }
     });
-	
-	$(".embed-thumbnail-image").each(function() {
-		var href = $(this).attr("href"); 
-        if(href != undefined) { 
-			if(href.endsWith(".gif")) {
-				$(this).empty(); 
-				$(this).html('<img src="'+href+'"></img>'); 
-			}
-        } 
-	});
 };
 
 agif.prototype.onMessage = function () {
-	console.log("ONMESSAGE");
     this.convert();
 };
 agif.prototype.onSwitch = function () {
@@ -44,7 +32,7 @@ agif.prototype.getName = function () {
     return "Autogif";
 };
 agif.prototype.getDescription = function () {
-    return "Don't use currently broken.";
+    return "Autoplay gifs without having to hover.";
 };
 agif.prototype.getVersion = function () {
     return "0.1.0";
