@@ -101,23 +101,23 @@ SettingsPanel.prototype.changeTab = function(tab) {
         case "bd-themes-tab":
             controlGroups.html("<span>Coming soon</span>");
         break;
-        case "bd-other-tab":
-            
-        break;
+        //case "bd-other-tab":
+        //    
+        //break;
     }
 };
 
-function SaveJSONSettings() {
-    var os = process.platform;
-    var _dataPath = os == "win32" ? process.env.APPDATA : os == 'darwin' ? process.env.HOME + '/Library/Preferences' : '/var/local';
-    _dataPath += "/BetterDiscord/settings/";
-    var file = _dataPath + "Settings.json";
-    fs.mkdir(_dataPath, function(e) {});
-    fs.writeFile(file, '{    "bdags0": "' + settingsCookie["bda-gs-0"] +'",    "bdags1": "' + settingsCookie["bda-gs-1"] + '",    "bdags2": "' + settingsCookie["bda-gs-2"] + '",    "bdags4": "' + settingsCookie["bda-gs-4"] + '",    "bdags3": "' +  settingsCookie["bda-gs-3"] + '",    "bdaes0": "' + settingsCookie["bda-es-0"] + '",    "bdaes7": "' + settingsCookie["bda-es-7"] + '",    "bdaes1": "' + settingsCookie["bda-es-1"] + '",    "bdaes2": "' + settingsCookie["bda-es-2"] + '",    "bdaes3": "' + settingsCookie["bda-es-3"] + '",    "bdaes4": "' + settingsCookie["bda-es-4"] + '",    "bdaes5": "' + settingsCookie["bda-es-5"] + '",    "bdaes6": "' + settingsCookie["bda-es-6"] + '",    "bdcustomcss": "' + localStorage.getItem("bdcustomcss") + '"}');
-    console.log("Successfully saved Settings to: " + file);
-}
+//function SaveJSONSettings() {
+//    var os = process.platform;
+//    var _dataPath = os == "win32" ? process.env.APPDATA : os == 'darwin' ? process.env.HOME + '/Library/Preferences' : '/var/local';
+//    _dataPath += "/BetterDiscord/settings/";
+//    var file = _dataPath + "Settings.json";
+//    fs.mkdir(_dataPath, function(e) {});
+//    fs.writeFile(file, '{    "bdags0": "' + settingsCookie["bda-gs-0"] +'",    "bdags1": "' + settingsCookie["bda-gs-1"] + '",    "bdags2": "' + settingsCookie["bda-gs-2"] + '",    "bdags4": "' + settingsCookie["bda-gs-4"] + '",    "bdags3": "' +  settingsCookie["bda-gs-3"] + '",    "bdaes0": "' + settingsCookie["bda-es-0"] + '",    "bdaes7": "' + settingsCookie["bda-es-7"] + '",    "bdaes1": "' + settingsCookie["bda-es-1"] + '",    "bdaes2": "' + settingsCookie["bda-es-2"] + '",    "bdaes3": "' + settingsCookie["bda-es-3"] + '",    "bdaes4": "' + settingsCookie["bda-es-4"] + '",    "bdaes5": "' + settingsCookie["bda-es-5"] + '",    "bdaes6": "' + settingsCookie["bda-es-6"] + '",    "bdcustomcss": "' + localStorage.getItem("bdcustomcss") + '"}');
+//    console.log("Successfully saved Settings to: " + file);
+//}
 
-function LoadJSONSettings() {
+//function LoadJSONSettings() {
     //var os = process.platform;
     //var _dataPath = os == "win32" ? process.env.APPDATA : os == 'darwin' ? process.env.HOME + '/Library/Preferences' : '/var/local';
     //_dataPath += "/BetterDiscord/settings/";
@@ -210,8 +210,8 @@ function LoadJSONSettings() {
     //    SettingsPanel.prototype.applyCustomCss(_customcss2);
     //}
 //    fs.rmdir(_dataPath, function(e) {});
-    console.log("This has been temporarily disabled due to isses with things.");
-}
+//    console.log("This has been temporarily disabled due to isses with things.");
+//}
 
 SettingsPanel.prototype.updateSetting = function(checkbox) {    
         var cb = $(checkbox).children().find('input[type="checkbox"]');
@@ -278,7 +278,7 @@ SettingsPanel.prototype.construct = function() {
     '           <div class="tab-bar-item bd-tab" id="bd-customcss-tab" onclick="settingsPanel.changeTab(\'bd-customcss-tab\');">Custom CSS</div>' +
     '           <div class="tab-bar-item bd-tab" id="bd-plugins-tab" onclick="settingsPanel.changeTab(\'bd-plugins-tab\');">Plugins</div>' +
     '           <div class="tab-bar-item bd-tab" id="bd-themes-tab" onclick="settingsPanel.changeTab(\'bd-themes-tab\');">Themes</div>' +
-    '           <div class="tab-bar-item bd-tab" id="bd-other-tab" onclick="settingsPanel.changeTab(\'bd-other-tab\');">Other</div>' +
+    //'           <div class="tab-bar-item bd-tab" id="bd-other-tab" onclick="settingsPanel.changeTab(\'bd-other-tab\');">Other</div>' +
     '       </div>' +
     '       <div class="bd-settings">' +
     '' +
@@ -377,13 +377,13 @@ SettingsPanel.prototype.construct = function() {
     
     settingsInner += '' +
     '               </div>' +
-    '                     <div class="bd-pane control-group" id="bd-other-pane" style="display:none;">' +
-    '                         <div class="button-group">' +
-    '                             <button type="button" class="btn btn-primary" onclick="LoadJSONSettings()" id="load-json-settings">Load Settings</button>' +
-    '                             <button type="button" class="btn btn-primary" onclick="SaveJSONSettings()" id="save-json-settings">Save Settings</button>' +
-    '                         </div>' +
-    '                     </div>' +
-    '               </div>' +
+    //'                     <div class="bd-pane control-group" id="bd-other-pane" style="display:none;">' +
+    //'                         <div class="button-group">' +
+    //'                             <button type="button" class="btn btn-primary" onclick="LoadJSONSettings()" id="load-json-settings">Load Settings</button>' +
+    //'                             <button type="button" class="btn btn-primary" onclick="SaveJSONSettings()" id="save-json-settings">Save Settings</button>' +
+    //'                         </div>' +
+    //'                     </div>' +
+    //'               </div>' +
     '' +
     '       </div>' +
         '   <div style="background:#2E3136; color:#ADADAD; height:30px; position:absolute; bottom:0; left:0; right:0;">' +
