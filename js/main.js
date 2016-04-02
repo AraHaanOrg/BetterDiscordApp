@@ -73,6 +73,7 @@ var defaultCookie = {
              "img": ""
          }
      }
+};
 
 var settingsCookie = {};
 var bdaf = false;
