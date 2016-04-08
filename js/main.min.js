@@ -913,7 +913,7 @@ function QuickEmoteMenu() {
 
 }
 
-ickEmoteMenu.prototype.init = function (reload) {
+QuickEmoteMenu.prototype.init = function (reload) {
 
     emoteBtn = null;
     $(".channel-textarea").first().removeClass("emotemenu-enabled");
